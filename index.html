@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <div id = "container">
+            <div id = "output">
+                nothing yet
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function(){
+
+
+                    var url = "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCl9UPh97PPW0FSz9iyeOH5Q&key=AIzaSyBxset1d9zy1GN10oG7weniHQXPptSeXKM"
+                    $.getJSON(url,function(data){
+                      console.log(data.items[0].statistics.subscriberCount);
+                    });
+
+                    var url = "https://www.rprxy.xyz/places/api-get-details?assetId=3168928542" //https://www.roblox.com/places/api-get-details?assetId=3168928542
+                
+                    $.getJSON(url,function(data){
+                        var count = data.OnlineCount
+                        var content = {
+                            "frames": [
+                                {
+                                    "text": count,
+                                    "icon": null
+                                }
+                            ]
+                        }
+                        var output  = document.getElementById("output");
+                        output.innerHTML = content
+                    });
+                });
+            </script>
+        </div>
+    </head>
+</html>

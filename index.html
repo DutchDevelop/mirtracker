@@ -3,48 +3,46 @@
     <head>
     <meta charset="utf-8">
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <div id = "container">
-            <div id = "output"> {"frames":[{"text":"211 Playing.","icon":"a4373"}]} </div>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    
-                    var cors_api_url = 'https://afternoon-bayou-43678.herokuapp.com/';
-                    function doCORSRequest(options, printResult) {
-                        var x = new XMLHttpRequest();
-                        x.open(options.method, cors_api_url + options.url);
-                        x.onload = x.onerror = function() {
-                        printResult(
-                            x.status ,(x.responseText || '')
-                        );
-                        };
-                        if (/^POST/i.test(options.method)) {
-                        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        }
-                        x.send(options.data);
+        <pre id = "output"> {"frames":[{"text":"211 Playing.","icon":"a4373"}]} </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                var cors_api_url = 'https://afternoon-bayou-43678.herokuapp.com/';
+                function doCORSRequest(options, printResult) {
+                    var x = new XMLHttpRequest();
+                    x.open(options.method, cors_api_url + options.url);
+                    x.onload = x.onerror = function() {
+                    printResult(
+                        x.status ,(x.responseText || '')
+                    );
+                    };
+                    if (/^POST/i.test(options.method)) {
+                    x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     }
+                    x.send(options.data);
+                }
 
-                    doCORSRequest({
-                        method: 'GET',
-                        url: "https://www.roblox.com/places/api-get-details?assetId=3168928542"
-                    }, function printResult(Status,Responce) {
-                        if (Responce){
-                            var obj = JSON.parse(Responce);
-                            console.log(obj);
-                            var count = obj.OnlineCount
-                            var content = {
-                                "frames": [
-                                    {
-                                        "text": count + " Playing.",
-                                        "icon": "a4373"
-                                    }
-                                ]
-                            }
-                            var output  = document.getElementById("output");
-                            output.innerHTML = JSON.stringify(content);
-                        };
-                     });
-                });
-            </script>
-        </div>
+                doCORSRequest({
+                    method: 'GET',
+                    url: "https://www.roblox.com/places/api-get-details?assetId=3168928542"
+                }, function printResult(Status,Responce) {
+                    if (Responce){
+                        var obj = JSON.parse(Responce);
+                        console.log(obj);
+                        var count = obj.OnlineCount
+                        var content = {
+                            "frames": [
+                                {
+                                    "text": count + " Playing.",
+                                    "icon": "a4373"
+                                }
+                            ]
+                        }
+                        var output  = document.getElementById("output");
+                        output.innerHTML = JSON.stringify(content);
+                    };
+                 });
+            });
+        </script>
     </head>
 </html>
